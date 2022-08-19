@@ -1,14 +1,13 @@
-# NOTE: not usable as is
-# This needs the variables set in a file - will redo as role soon
 ---
 - debug:
-    msg: "Running Stash NAS Plugin..."
-    
-- name: Stash Directory
+    msg: "Running Stash Plugin..."
+
+- name: Create Stash Directories
   file:
     path: "{{ item }}"
     state: directory
   with_items:
+    - "{{ stash_data_directory }}"
     - "{{ stash_data_directory }}/cache"
     - "{{ stash_data_directory }}/config"
     - "{{ stash_data_directory }}/config/root"
@@ -16,39 +15,37 @@
     - "{{ stash_data_directory }}/data"
     - "{{ stash_data_directory }}/generated"
     - "{{ stash_data_directory }}/metadata"
-    
-    - name: Stash Docker Container
+
+- name: Create Stash Docker Container
   docker_container:
-    name: stash
-    image: stashapp/stash:latest
-    pull: true
-    log_driver: "json-file"
-    log_options:
-        max-size: "10m"
-        max-file: "10"
-    volumes:
-      - "{{ stash_data_directory }}/cache:/cache:rw"
-      - "{{ stash_data_directory }}/config:/root/.stash:rw"
-      - "{{ stash_data_directory }}/data:/data:rw"
-      - "{{ stash_data_directory }}/generated:/generated:rw"
-      - "{{ stash_data_directory }}/metadata:/metadata:rw"
-      - "{{ stash_media_directory }}:/porn:ro"
-    ports:
-      - "{{ stash_http_port }}:9999"
-    env:
-      PUID: "{{ stash_user_id }}"
-      PGID: "{{ stash_group_id }}"
-      STASH_STASH: "/data/"
-      STASH_GENERATED: "/generated/"
-      STASH_METADATA: "/metadata/"
-      STASH_CACHE: "/cache/"
-      TZ: "{{ ansible_nas_timezone }}"
-    restart_policy: unless-stopped
-    labels:
-      traefik.enable: "{{ stash_available_externally | string }}"
-      traefik.http.routers.stash.rule: "Host(`stash.{{ ansible_nas_domain }}`)"
-      traefik.http.routers.stash.tls.certresolver: "letsencrypt"
-      traefik.http.routers.stash.tls.domains[0].main: "{{ ansible_nas_domain }}"
-      traefik.http.routers.stash.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
-      traefik.http.services.stash.loadbalancer.server.port: "9999"
-    memory: "{{ stash_memory }}"
+  name: stash
+  image: stashapp/stash:latest
+  pull: true
+  log_driver: "json-file"
+  log_options:
+      max-file: "10"
+      max-size: "10m"
+  volumes:
+    - "{{ stash_data_directory }}/cache:/cache:rw"
+    - "{{ stash_data_directory }}/config:/root/.stash:rw"
+    - "{{ stash_data_directory }}/data:/data:rw"
+    - "{{ stash_data_directory }}/generated:/generated:rw"
+    - "{{ stash_data_directory }}/metadata:/metadata:rw"
+    - "{{ stash_media_directory }}:/porn:ro"
+  ports:
+    - "{{ stash_http_port }}:9999"
+  env:
+    STASH_STASH: "/data/"
+    STASH_GENERATED: "/generated/"
+    STASH_METADATA: "/metadata/"
+    STASH_CACHE: "/cache/"
+    TZ: "{{ ansible_nas_timezone }}"
+  restart_policy: unless-stopped
+  labels:
+    traefik.enable: "{{ stash_available_externally | string }}"
+    traefik.http.routers.stash.rule: "Host(`stash.{{ ansible_nas_domain }}`)"
+    traefik.http.routers.stash.tls.certresolver: "letsencrypt"
+    traefik.http.routers.stash.tls.domains[0].main: "{{ ansible_nas_domain }}"
+    traefik.http.routers.stash.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
+    traefik.http.services.stash.loadbalancer.server.port: "9999"
+  memory: "{{ stash_memory }}"

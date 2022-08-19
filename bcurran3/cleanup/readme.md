@@ -2,7 +2,7 @@
 
 Homepage: <https://github.com/bcurran3/ansible-nas-plugins/tree/main/bcurran3/cleanup>
 
-Cleanup is a plugin I wrote to stop and remove any Docker containers that are still running after you've changed `<appname>_enabled: true` to `<appname>_enabled: false`. These app will have their Docker containers stopped and removed.
+Cleanup is a plugin I wrote to stop and remove any Docker containers that are still running after you've changed `<appname>_enabled: true` to `<appname>_enabled: false`. These apps will have their Docker containers stopped and removed.
 
 ## Installation and Configuration
 
