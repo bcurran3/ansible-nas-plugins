@@ -1,6 +1,6 @@
 ## This is an [Ansible-NAS](https://github.com/davestephens/ansible-nas) Plugin repository
 
-**NOTE:** Ansible NAS plugins are created by independent developers and are not endorsed, sponsored, or supported in any way by the author of Ansible NAS. Please contact the plugin's developer for any and all support.
+**NOTE:** Ansible NAS plugins are created by independent developers and are not endorsed, sponsored, or supported in any way by [Dave Stephens](https://github.com/davestephens) the author of [Ansible-NAS](https://github.com/davestephens/ansible-nas). Please contact the plugin's developer for any and all support.
 
 **Please read the README.md's in the subdirectory named after the developer.**
 
