@@ -1,8 +1,4 @@
 ## bcurran3's Ansible-NAS plugins:
 
-* cleanup
-* stash
-
-**NOTE: More info found in their respective directories**
-
-
+* [Cleanup](https://github.com/bcurran3/ansible-nas-plugins/blob/main/bcurran3/cleanup/README.md)
+* [Stash](https://github.com/bcurran3/ansible-nas-plugins/blob/main/bcurran3/stash/README.md)
