@@ -2,21 +2,22 @@
 
 Homepage: <https://github.com/bcurran3/ansible-nas-plugins/tree/main/bcurran3/cleanup>
 
-Cleanup is a plugin to stop and remove any Docker containers that are running after you've disabled them via `<appname>_enabled: true`. Apps that you are no longer running will have their Docker containers stopped and removed.
+Cleanup is a plugin I wrote to stop and remove any Docker containers that are still running after you've changed `<appname>_enabled: true` to `<appname>_enabled: false`. These app will have their Docker containers stopped and removed.
 
-## Configuration
+## Installation and Configuration
 
-1. From the same directory you cloned Ansible-NAS, clone the plugsins.
+1. Clone the plugins repository.
 `git clone https://github.com/bcurran3/ansible-nas-plugins.git`
 
-2. Copy the contents of the `ansible-nas-plugins` to your `ansible-nas/plugins` directory. This will copy all plugins in the repository but you don't need to enable or use them all.
+2. Copy the contents of the `ansible-nas-plugins` to your `ansible-nas/plugins` directory. There may be more than one plugin by this developer, you don't need to use them all.
 
-3. If this is the first plugin you've installed than copy `plugins/sample.yml` to `plugins/plugins.yml`. Edit `samples.yml` and add **at the bottom**:
+3. If you're installing your first plugin than copy `plugins/sample.yml` to `plugins/plugins.yml`. Edit `plugins.yml` and add:
 ```
   - import_tasks: plugins/bcurran3/cleanup/cleanup.yml
     when: (cleanup_enabled | default(False))
     tags: cleanup
 ```
+NOTE: For Cleanup to work correctly, you want to make sure it's always the last entry in your `plugins/plugins.yml` file.
 
 4. Add `cleanup_enabled: true` to your `inventories/<your_inventory>/nas.yml` file.
 
