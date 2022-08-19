@@ -1,0 +1,60 @@
+---
+- name: Create OsClass Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "1000"
+    group: "1000"
+  with_items:
+    - "{{ osclass_data_directory }}"
+    - "{{ osclass_data_directory }}/data"
+    - "{{ osclass_data_directory }}/db"
+
+- name: Create OsClass MariaDB Docker Container
+  docker_container:
+    name: osclass_mariadb
+    image: bitnami/mariadb:latest
+    pull: true
+    volumes:
+      - "{{ osclass_data_directory }}/db:/bitnami/mariadb"
+    env:
+      ALLOW_EMPTY_PASSWORD: "no"
+      MARIADB_ROOT_PASSWORD: "Ansible-NAS"
+      MARIADB_USER: "osclass"
+      MARIADB_PASSWORD: "bitnami"
+      MARIADB_DATABASE: "osclass_db"
+      TZ: "{{ ansible_nas_timezone }}"
+    restart_policy: unless-stopped
+    labels:
+      traefik.enable: "false"
+
+- name: Create OsClass Docker Container
+  docker_container:
+    name: osclass
+    image: bitnami/osclass:latest
+    pull: true
+#    links:
+#      - osclass_mariadb
+    volumes:
+      - "{{ osclass_data_directory }}/data:/bitnami/osclass"
+    ports:
+      - "{{ osclass_port }}:8080"
+    env:
+      ALLOW_EMPTY_PASSWORD: "no"
+      OSCLASS_DATABASE_USER: "osclass"
+      OSCLASS_DATABASE_PASSWORD: "bitnami"
+      OSCLASS_DATABASE_NAME: "osclass_db"
+      OSCLASS_DATABASE_HOST: "osclass_mariadb"
+      OSCLASS_USERNAME: "admin"
+      OSCLASS_PASSWORD: "{{ osclass_admin_password }}"
+      OSCLASS_WEB_TITLE: "{{ osclass_web_title }}"
+      TZ: "{{ ansible_nas_timezone }}"
+    restart_policy: unless-stopped
+    labels:
+      traefik.enable: "{{ osclass_available_externally | string }}"
+      traefik.http.routers.classifieds.rule: "Host(`{{ osclass_hostname }}.{{ ansible_nas_domain }}`)"
+      traefik.http.routers.classifieds.tls.certresolver: "letsencrypt"
+      traefik.http.routers.classifieds.tls.domains[0].main: "{{ ansible_nas_domain }}"
+      traefik.http.routers.classifieds.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
+      traefik.http.services.classifieds.loadbalancer.server.port: "8080"
+    memory: "{{ osclass_memory }}"
