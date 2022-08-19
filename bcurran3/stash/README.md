@@ -1,6 +1,6 @@
 # Ansible-NAS plugin: Stash
 
-[Homepage: ](https://stashapp.cc/))
+[Homepage: ](https://stashapp.cc/)
 [Container: ](https://github.com/stashapp/stash)
 [Documentation: ](https://github.com/stashapp/stash/wiki)
 
