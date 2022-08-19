@@ -18,9 +18,9 @@ Stash is a self-hosted webapp written in Go which organizes and serves your porn
 
 2. Copy the contents of the `ansible-nas-plugins` to your `ansible-nas/plugins` directory. There may be more than one plugin by this developer, you don't need to use them all.
 
-3. <ins>If</ins> you're installing your first plugin than copy `plugins/sample.yml` to `plugins/plugins.yml`.
+3. <ins>If</ins> you're installing your first plugin, then copy `plugins/sample.yml` to `plugins/plugins.yml`.
 
-4. Edit `plugins.yml` and add:
+4. Edit `plugins/plugins.yml` and add:
 ```
   - import_tasks: plugins/bcurran3/stash/stash.yml
     when: (stash_enabled | default(False))
