@@ -4,5 +4,5 @@
 
 **For info about the plugins in this repo, read the README.md's in the subdirectory named after the developer.**
 
-NOTE: This README.md is purposely generic so that it can be cloned and used by other developers without conflict.
+NOTE: This README.md is purposely generic so that it can be cloned and used by other developers without conflict.  
 ^^^^^ placeholder statement ^^^^^
