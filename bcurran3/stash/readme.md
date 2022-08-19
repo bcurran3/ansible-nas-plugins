@@ -1,8 +1,8 @@
 # Ansible-NAS plugin: Stash
 
-Homepage: <Stash is a self-hosted webapp written in Go which organizes and serves your porn.>
-
-[Stash](https://stashapp.cc/)
+[Homepage: ](https://stashapp.cc/))
+[Container: ](https://github.com/stashapp/stash)
+[Documentation: ](https://github.com/stashapp/stash/wiki)
 
 Stash is a self-hosted webapp written in Go which organizes and serves your porn.
 * Stash gathers information about videos in your collection from the internet, and is extensible through the use of community-built plugins for a large number of content producers and sites.
