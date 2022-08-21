@@ -18,7 +18,8 @@ Ghost is a free and open source blogging platform written in JavaScript and dist
 
 4. Edit `plugins/plugins.yml` and add:
 ```
-  - role: plugins/bcurran3/ghost
+  - import_role: 
+      name: plugins/bcurran3/ghost
     tags:
       - ghost
     when: (ghost_enabled | default(False))
