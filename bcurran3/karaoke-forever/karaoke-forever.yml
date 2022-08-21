@@ -21,9 +21,4 @@
       traefik.http.routers.karaokeforever.tls.domains[0].main: "{{ ansible_nas_domain }}"
       traefik.http.routers.karaokeforever.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
       traefik.http.services.karaokeforever.loadbalancer.server.port: "80"
-#      traefik.backend: "karaokeforever"
-#      traefik.frontend.rule: "Host:karaokeforever.{{ ansible_nas_domain }}"
-#      traefik.enable: "{{ karaokeforever_available_externally }}"
-#      traefik.frontend.whiteList.sourceRange: "{{ karaokeforever_traefik_whitelist }}"
-#	      traefik.port: "80"
-    memory: 512m
+    memory: "{{ karaokeforever_memory }}"

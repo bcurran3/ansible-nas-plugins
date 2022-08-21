@@ -1,0 +1,8 @@
+###
+### Ghost
+###
+ghost_enabled: false
+ghost_available_externally: false
+ghost_data_directory: "{{ docker_home }}/ghost"
+ghost_port_http: "2368"
+ghost_memory_limit: "1G"
