@@ -27,7 +27,7 @@ Stash is a self-hosted webapp written in Go which organizes and serves your porn
     tags: stash
 ```
 
-5. Add the following to your `inventories/<your_inventory>/nas.yml` file and edit per your needs.
+5. Add the following to your `inventories/<your_inventory>/group_vars/nas.yml` file and edit per your needs.
 ```
 ###
 ### Stash

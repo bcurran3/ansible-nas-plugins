@@ -20,12 +20,11 @@ Ghost is a free and open source blogging platform written in JavaScript and dist
 ```
   - import_role: 
       name: plugins/bcurran3/ghost
-    tags:
-      - ghost
     when: (ghost_enabled | default(False))
+    tags: ghost
 ```
 
-5. Add the following to your `inventories/<your_inventory>/nas.yml` file to enable Ghost.
+5. Add the following to your `inventories/<your_inventory>/group_vars/nas.yml` file to enable Ghost.
 ```
 ghost_enabled: true
 ```

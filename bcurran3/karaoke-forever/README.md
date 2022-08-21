@@ -25,7 +25,7 @@ Host awesome karaoke parties where everyone can easily find and queue songs from
     tags: karaokeforever
 ```
 
-5. Add the following to your `inventories/<your_inventory>/nas.yml` file and edit per your needs.
+5. Add the following to your `inventories/<your_inventory>/group_vars/nas.yml` file and edit per your needs.
 ```
 ###
 ### Karaoke-Forever

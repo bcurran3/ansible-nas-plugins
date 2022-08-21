@@ -21,7 +21,7 @@ Cleanup is a plugin I wrote to stop and remove any Docker containers that are st
 ```
 NOTE: For Cleanup to work correctly, you want to make sure it's always the last entry in your `plugins/plugins.yml` file.
 
-5. Add `cleanup_enabled: true` to your `inventories/<your_inventory>/nas.yml` file.
+5. Add `cleanup_enabled: true` to your `inventories/<your_inventory>/group_vars/nas.yml` file.
 
 ## Usage
 
